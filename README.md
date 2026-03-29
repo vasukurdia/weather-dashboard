@@ -6,7 +6,7 @@ A responsive weather dashboard built with **ReactJS** and the **Open-Meteo API**
 
 ## 🚀 Live Demo
 
-> _Add your hosted link here (e.g. Vercel / Netlify)_
+> _https://weather-dashboard-livid-tau.vercel.app/_
 
 ---
 
