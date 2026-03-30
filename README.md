@@ -136,6 +136,6 @@ All charts support:
 
 - **Name:** _Vasu Kurdia_
 - **Email:** _vasukurdia@gmail.com_
-- **GitHub:** github.com/vasukurdia
+- **GitHub:** _https://github.com/vasukurdia_
 
 ---
