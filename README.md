@@ -12,7 +12,7 @@ A responsive weather dashboard built with **ReactJS** and the **Open-Meteo API**
 
 ## 📸 Screenshots
 
-> _Add screenshots here after running the project_
+> _![Screenshot 1](./screenshots/screenshot1.jpg)_
 
 ---
 
@@ -96,8 +96,8 @@ The app will be available at `http://localhost:5173`
 weather-dashboard/
 ├── public/
 ├── src/
-│   ├── App.jsx        # Main application (all components)
-│   └── main.jsx       # React entry point
+│   ├── App.jsx
+│   └── main.jsx
 ├── index.html
 ├── package.json
 └── README.md
@@ -118,16 +118,6 @@ weather-dashboard/
 
 ---
 
-## ⚠️ Known Limitations
-
-| Limitation | Reason |
-|---|---|
-| **CO₂ data not available** | Open-Meteo API does not provide CO₂ readings |
-| **Historical AQ limited to ~3 months** | `air-quality-api` provides limited past data |
-| **Current temp shows "–" for past dates** | `current_weather` field only works for today |
-
----
-
 ## 📊 Chart Interactions
 
 All charts support:
@@ -136,28 +126,6 @@ All charts support:
 - 🔄 **Reset** — double click or toolbar reset button
 - 💾 **Download** — save chart as PNG via toolbar
 - 📌 **Tooltip** — hover for exact values
-
----
-
-## 🏗️ Build for Production
-
-```bash
-npm run build
-```
-
-Output will be in the `dist/` folder. Deploy to **Vercel**, **Netlify**, or any static hosting.
-
-### Deploy to Vercel (Recommended)
-```bash
-npm install -g vercel
-vercel
-```
-
-### Deploy to Netlify
-```bash
-npm install -g netlify-cli
-netlify deploy --prod --dir=dist
-```
 
 ---
 
