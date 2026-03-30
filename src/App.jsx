@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import ReactApexChart from "react-apexcharts";
 
-// ─── GLOBAL STYLES ──────────────────────────────────────────────────────────
 const CSS = `
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700&family=Playfair+Display:wght@600;700&display=swap');
 
@@ -235,7 +234,6 @@ const CSS = `
   .apexcharts-menu    { background: var(--card) !important; border: 1.5px solid var(--border) !important; border-radius: 8px !important; }
 `;
 
-// ─── CONSTANTS ──────────────────────────────────────────────────────────────
 const WMO = {
   0:  { label:"Clear Sky",      icon:"☀️"  }, 1:  { label:"Mainly Clear",  icon:"🌤️" },
   2:  { label:"Partly Cloudy",  icon:"⛅"  }, 3:  { label:"Overcast",      icon:"☁️"  },
@@ -280,7 +278,6 @@ function pm25toAQI(pm) {
   return Math.round(200+((300-200)/(250.4-150.5))*(pm-150.5));
 }
 
-// ─── APEX CHART DEFAULTS ────────────────────────────────────────────────────
 function baseOptions({categories,yLabel="",unit="",colors=["#1e6fba"],type="line",height=220}) {
   return {
     chart:{
@@ -314,14 +311,12 @@ function baseOptions({categories,yLabel="",unit="",colors=["#1e6fba"],type="line
   };
 }
 
-// ─── API ─────────────────────────────────────────────────────────────────────
 async function apiFetch(url) {
   const r = await fetch(url);
   if (!r.ok) throw new Error(`API error ${r.status}`);
   return r.json();
 }
 
-// ✅ FIX: Past date → Archive API | Today → Forecast API
 async function fetchWeather(lat, lon, date) {
   const today     = toDate(new Date());
   const isArchive = date < today;
@@ -329,7 +324,6 @@ async function fetchWeather(lat, lon, date) {
   const hourlyVars = "temperature_2m,relativehumidity_2m,precipitation,visibility,windspeed_10m,weathercode";
 
   if (isArchive) {
-    // Archive API — no current_weather, no precipitation_probability_max
     const u = new URL("https://archive-api.open-meteo.com/v1/archive");
     u.searchParams.set("latitude",   lat);
     u.searchParams.set("longitude",  lon);
@@ -343,7 +337,6 @@ async function fetchWeather(lat, lon, date) {
     u.searchParams.set("timezone", "auto");
     return apiFetch(u.toString());
   } else {
-    // Forecast API — has current_weather + precipitation_probability_max
     const u = new URL("https://api.open-meteo.com/v1/forecast");
     u.searchParams.set("latitude",   lat);
     u.searchParams.set("longitude",  lon);
@@ -407,7 +400,6 @@ async function reverseGeocode(lat, lon) {
   } catch { return "Your Location"; }
 }
 
-// ─── CHART CARD ──────────────────────────────────────────────────────────────
 function ChartCard({title,hint,children}) {
   return (
     <div className="chart-card">
@@ -427,7 +419,6 @@ function Loader({text="Fetching data…"}) {
   );
 }
 
-// ─── PAGE 1 ──────────────────────────────────────────────────────────────────
 function CurrentPage({location}) {
   const [date,    setDate]    = useState(toDate(new Date()));
   const [wData,   setWData]   = useState(null);
@@ -465,7 +456,6 @@ function CurrentPage({location}) {
   const h  = wData?.hourly;
   const aq = aqData?.hourly;
 
-  // ✅ FIX: Past date → midday hourly values | Today → current_weather
   const isToday     = date===toDate(new Date());
   const middayIdx   = h?.time?.findIndex(t=>new Date(t).getHours()===12)??0;
   const displayTemp = isToday ? cw?.temperature       : h?.temperature_2m?.[middayIdx];
@@ -478,7 +468,6 @@ function CurrentPage({location}) {
   const aqIdx = (aq?.time||[]).findIndex(t=>new Date(t).getHours()===nowH);
   const aqi_  = aqIdx>=0?aqIdx:0;
 
-  // For past date, show midday humidity; for today show current hour
   const curHum  = isToday ? h?.relativehumidity_2m?.[hIdx] : h?.relativehumidity_2m?.[middayIdx];
   const curPM10 = aq?.pm10?.[aqi_];
   const curPM25 = aq?.pm2_5?.[aqi_];
@@ -489,7 +478,6 @@ function CurrentPage({location}) {
   const aqiVal  = euAQI??pm25toAQI(curPM25)??0;
   const aqiLvl  = getAQILevel(aqiVal);
 
-  // Sun progress
   const sr  = d?.sunrise?.[0]?new Date(d.sunrise[0]):null;
   const ss  = d?.sunset?.[0] ?new Date(d.sunset[0]) :null;
   const now = new Date();
@@ -680,7 +668,6 @@ function CurrentPage({location}) {
   );
 }
 
-// ─── PAGE 2 ──────────────────────────────────────────────────────────────────
 function HistoricalPage({location}) {
   const twoYrsAgo = new Date(); twoYrsAgo.setFullYear(twoYrsAgo.getFullYear()-2);
 
@@ -903,7 +890,6 @@ function HistoricalPage({location}) {
   );
 }
 
-// ─── ROOT ────────────────────────────────────────────────────────────────────
 export default function App() {
   const [tab,      setTab]      = useState("current");
   const [location, setLocation] = useState(null);
