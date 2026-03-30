@@ -13,6 +13,9 @@ A responsive weather dashboard built with **ReactJS** and the **Open-Meteo API**
 ## 📸 Screenshots
 
 > _![Screenshot 1](./screenshots/screenshot1.jpg)_
+> _![Screenshot 2](./screenshots/screenshot2.jpg)_
+> _![Screenshot 3](./screenshots/screenshot3.jpg)_
+> _![Screenshot 4](./screenshots/screenshot4.jpg)_
 
 ---
 
