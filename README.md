@@ -31,7 +31,7 @@ A responsive weather dashboard built with **ReactJS** and the **Open-Meteo API**
   - Sunrise & Sunset times (IST)
   - Max Wind Speed, Precipitation Probability Max
   - Air Quality: AQI (EU), PM10, PM2.5, CO, NO₂, SO₂
-  - CO₂ — _Not available via Open-Meteo API (noted in UI)_
+  - CO₂ — _Not available via Open-Meteo API_
 - **6 Hourly Charts** (with Zoom, Pan, Scroll, Download):
   - Temperature (°C / °F)
   - Relative Humidity
@@ -136,6 +136,6 @@ All charts support:
 
 - **Name:** _Vasu Kurdia_
 - **Email:** _vasukurdia@gmail.com_
-- **GitHub:** _https://github.com/vasukurdia_
+- **GitHub:** github.com/vasukurdia
 
 ---
